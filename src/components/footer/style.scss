@@ -1,0 +1,20 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+  color: #c0c0c0;
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  
+  a {
+    & {
+      background: none;
+      color: inherit;
+    }
+
+    &:hover {
+      background: none;
+      color: #707070;
+    }
+  }
+}
