@@ -1,16 +1,15 @@
-import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Switch, Route, Redirect, Link } from 'react-router-dom';
-import Footer from "./components/footer/footer.component";
-import Header from "./components/header/header.component";
-import * as NotFoundImage from "./images/404.jpg";
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import './App.scss';
-import LoginPage from './pages/login/login.page';
-import Dashboard from './pages/dashboard/dashboard.page';
-import { selectActiveUser } from './store/user/user.selectors';
-import { createStructuredSelector } from 'reselect';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import React from 'react';
 import { connect } from 'react-redux';
+import { Link, Redirect, Route, Switch } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
+import './App.scss';
+import Footer from "./components/footer/footer.component";
+import * as NotFoundImage from "./images/404.jpg";
+import Dashboard from './pages/dashboard/dashboard.page';
+import LoginPage from './pages/login/login.page';
+import { selectActiveUser } from './store/user/user.selectors';
 
 const NotFoundPage = () => (
   <div style={{ textAlign: "center" }}>
@@ -31,7 +30,7 @@ const NotFoundPage = () => (
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#dfdfdf"
+      main: "#486aae"
     },
     secondary: {
       main: "#000"
@@ -44,9 +43,12 @@ function App({ activeUser }) {
     <div className="app-container">
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Header />
         <Switch>
-          <Route exact path="/" component={Dashboard} />
+          <Route exact path="/" render={() => {
+            return !activeUser ? (
+              <Redirect to="/login" />
+            ) : <Dashboard />
+          }}/>
           <Route exact path="/login" render={() => {
             return activeUser ? (
               <Redirect to="/" />

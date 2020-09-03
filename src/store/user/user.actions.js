@@ -5,13 +5,13 @@ export const setToken = (token) => ({
   payload: token
 })
 
-export const setCurrentUser = (user) => ({
-  type: UserActionTypes.SET_CURRENT_USER,
+export const setActiveUser = (user) => ({
+  type: UserActionTypes.SET_ACTIVE_USER,
   payload: user
 })
 
-export const setCurrentUserName = (name) => ({
-  type: UserActionTypes.SET_CURRENT_USER_NAME,
+export const setActiveUserName = (name) => ({
+  type: UserActionTypes.SET_ACTIVE_USER_NAME,
   payload: name
 })
 

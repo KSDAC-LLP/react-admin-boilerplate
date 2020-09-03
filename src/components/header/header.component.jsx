@@ -5,27 +5,18 @@ import { createStructuredSelector } from "reselect";
 import "./style.scss";
 import { selectActiveUser } from "../../store/user/user.selectors";
 import { logout } from "../../store/user/user.actions";
-
+import LogoImg from "../../images/logo.jpg";
 
 
 const Header = ({ activeUser, logout }) => (
   <div className="header">
     <Link className="logo-container" to="/">
-      LOGO HERE
+      <img src={LogoImg} className="logo" alt="NIAS powered by KSDAC LLP"/>
     </Link>
     <div className="options">
-      <Link className="option" to="/home">
-        SHOP
-      </Link>
-      {activeUser ? (
-        <div className="option" onClick={() => logout()}>
-          SIGN OUT
-        </div>
-      ) : (
-          <Link className="option" to="/login">
-            SIGN IN
-          </Link>
-        )}
+      <div className="option" onClick={() => logout()}>
+        SIGN OUT
+      </div>
     </div>
   </div>
 );

@@ -1,30 +1,22 @@
-import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Grid from '@material-ui/core/Grid';
+import Link from '@material-ui/core/Link';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { Login } from '../../services/auth.service';
+import { setActiveUser, setToken } from '../../store/user/user.actions';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+const SA2 = withReactContent(Swal)
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,8 +38,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LoginPage() {
+const LoginPage = ({ setActiveUser, setToken }) => {
   const classes = useStyles();
+  let history = useHistory();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+
+  const doLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const { token, user } = await Login();
+      setActiveUser(user);
+      setToken(token);
+      history.push('/');
+    } catch (err) {
+      console.log(err);
+      SA2.fire({
+        title: 'An error occured!',
+        text: err.message,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      })
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -59,7 +74,7 @@ export default function LoginPage() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={(e) => doLogin(e)}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -70,6 +85,8 @@ export default function LoginPage() {
             name="email"
             autoComplete="email"
             autoFocus
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -81,10 +98,8 @@ export default function LoginPage() {
             type="password"
             id="password"
             autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <Button
             type="submit"
@@ -96,22 +111,21 @@ export default function LoginPage() {
             Sign In
           </Button>
           <Grid container>
-            <Grid item xs>
+            <Grid item xs={12} style={{ textAlign: 'center' }}>
               <Link href="#" variant="body2">
                 Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
           </Grid>
         </form>
       </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
     </Container>
   );
 }
+
+const mapDispatchToProps = dispatch => ({
+  setActiveUser: user => dispatch(setActiveUser(user)),
+  setToken: token => dispatch(setToken(token))
+});
+
+export default connect(null, mapDispatchToProps)(LoginPage);
