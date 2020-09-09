@@ -56,7 +56,7 @@ function App({ activeUser }) {
             ) : <LoginPage />
           }}
           />
-          <Route path="/user-manage" render={() => {
+          <Route path="/user" render={() => {
             return !activeUser ? (
               <Redirect to="/" />
             ) : <UserManagePage />

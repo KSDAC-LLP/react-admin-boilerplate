@@ -32,23 +32,23 @@ import ExitToAppOutlinedIcon from "@material-ui/icons/ExitToAppOutlined";
 const NAV_OPTS = [
   { text: "Dashboard", url: "/", id: 1, icon: <DashboardOutlinedIcon /> },
   {
-    text: "Installation Tickets",
+    text: "MENU 1",
     url: "/",
     id: 2,
     icon: <AddCircleOutlineOutlinedIcon />,
   },
-  { text: "Maintenance Tickets", url: "/", id: 3, icon: <TuneOutlinedIcon /> },
+  { text: "MENU 2", url: "/", id: 3, icon: <TuneOutlinedIcon /> },
   {
-    text: "User Management",
-    url: "/user-manage",
+    text: "MENU 3",
+    url: "/",
     id: 4,
     icon: <PersonOutlinedIcon />,
   },
   {
-    text: "Satellite Management",
+    text: "MENU 4",
     url: "/",
     id: 5,
-    icon: <SatelliteOutlinedIcon />,
+    icon: <AddCircleOutlineOutlinedIcon />,
   },
 ];
 
@@ -122,7 +122,7 @@ const Header = ({ window, activeUser, children, logout }) => {
     <div className={classes.root}>
       <Hidden smDown>
         <Link className="logo-container" to="/">
-          <img src={LogoImg} className="logo" alt="NIAS powered by KSDAC LLP" />
+          <img src={LogoImg} className="logo" alt="powered by KSDAC LLP" />
         </Link>
       </Hidden>
       <CssBaseline />
@@ -142,7 +142,7 @@ const Header = ({ window, activeUser, children, logout }) => {
               <img
                 src={LogoImg}
                 className="logo"
-                alt="NIAS powered by KSDAC LLP"
+                alt="powered by KSDAC LLP"
               />
             </Link>
           </Hidden>
