@@ -9,6 +9,7 @@ import Footer from "./components/footer/footer.component";
 import * as NotFoundImage from "./images/404.jpg";
 import Dashboard from './pages/dashboard/dashboard.page';
 import LoginPage from './pages/login/login.page';
+import UserManagePage from './pages/user-management/user-management.page';
 import { selectActiveUser } from './store/user/user.selectors';
 
 const NotFoundPage = () => (
@@ -33,7 +34,7 @@ const theme = createMuiTheme({
       main: "#486aae"
     },
     secondary: {
-      main: "#000"
+      main: "#000000"
     }
   },
 });
@@ -53,6 +54,12 @@ function App({ activeUser }) {
             return activeUser ? (
               <Redirect to="/" />
             ) : <LoginPage />
+          }}
+          />
+          <Route path="/user-manage" render={() => {
+            return !activeUser ? (
+              <Redirect to="/" />
+            ) : <UserManagePage />
           }}
           />
           <Route path="*" component={NotFoundPage} />
