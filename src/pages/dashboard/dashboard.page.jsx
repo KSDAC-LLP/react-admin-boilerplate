@@ -1,13 +1,11 @@
 import React from 'react';
-import './style.scss';
+import './dashboard.style.scss';
 import HeaderComponent from '../../components/header/header.component';
-import SideNav from '../../components/side-nav/sidenav.component';
 
 
 const Dashboard = () => (
   <div className='dashboard'>
-    <HeaderComponent />
-    <SideNav>
+    <HeaderComponent>
       <p>
         Ut incididunt amet commodo consectetur. Duis officia labore minim nulla nulla dolor do labore occaecat non veniam ut tempor nostrud. In nostrud culpa culpa pariatur. Quis enim velit eu aliqua consectetur in esse eiusmod enim in aliqua elit. Amet enim adipisicing est excepteur ut. Ex sunt amet dolore veniam minim nulla id ea fugiat in est excepteur. Nostrud elit ad aliquip tempor nostrud.
 
@@ -29,7 +27,7 @@ const Dashboard = () => (
 
         Reprehenderit ipsum enim cillum incididunt deserunt Lorem nulla sint duis ut laboris commodo dolor. Est laboris et occaecat ad ullamco veniam sit cupidatat incididunt ipsum consectetur officia. Id nulla sint et cillum. Adipisicing cupidatat ipsum et velit velit quis occaecat consectetur laboris qui et exercitation ea. Dolor pariatur amet anim deserunt enim Lorem aliqua in nostrud qui ex amet officia nostrud. Duis incididunt duis duis nostrud Lorem occaecat dolore reprehenderit labore duis est. Eu id ipsum ex do nisi occaecat irure proident ipsum sunt occaecat.
         </p>
-    </SideNav>
+    </HeaderComponent>
   </div>
 )
 

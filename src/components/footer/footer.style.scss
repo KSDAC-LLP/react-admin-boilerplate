@@ -1,9 +1,11 @@
+@import "./../../index.scss";
+
 .footer {
   display: flex;
   justify-content: center;
   padding: 2rem 1rem;
   color: #c0c0c0;
-  position: absolute;
+  position: inherit;
   bottom: 0; left: 0; right: 0;
   
   a {
